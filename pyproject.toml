@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "miriam-pickup-lines"
+version = "1.0.0"
+description = "Miriam Defensor Santiago's witty political and romantic punchlines with typing effects"
+authors = [{name = "Onehand-Coding", email = "onehand.coding433@gmail.com"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = []
+
+[project.scripts]
+miriam-pickup-line = "miriam_pickup_lines.main:main"
+miriam-politics = "miriam_pickup_lines.main:main"
+miriam-wisdom = "miriam_pickup_lines.main:main"
+
+[project.urls]
+Homepage = "https://github.com/Onehand-Coding/miriam-pickup-lines"
+Repository = "https://github.com/Onehand-Coding/miriam-pickup-lines.git"
