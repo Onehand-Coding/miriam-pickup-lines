@@ -33,3 +33,6 @@ coverage.xml
 # Cache
 .ruff_cache/
 .pytest_cache/
+
+#Data
+data/
