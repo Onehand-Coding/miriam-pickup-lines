@@ -8,34 +8,46 @@ def main():
     """Main entry point for the Miriam pickup lines CLI"""
     parser = argparse.ArgumentParser(
         description="Miriam Defensor Santiago's Wisdom Generator",
-        epilog="Sample usage: miriam-pickup-line --interactive --category pickup_lines"
+        epilog="Sample usage: miriam-pickup-line --interactive --category pickup_lines",
     )
 
-    parser.add_argument('-i', '--interactive',
-                       action='store_true',
-                       help='Interactive mode with user-controlled pacing')
+    parser.add_argument(
+        "-i",
+        "--interactive",
+        action="store_true",
+        help="Interactive mode with user-controlled pacing",
+    )
 
-    parser.add_argument('-c', '--category',
-                       choices=['politics', 'pickup_lines', 'marriage', 'education', 'personal', 'relationship'],
-                       help='Filter quotes by category')
+    parser.add_argument(
+        "-c",
+        "--category",
+        choices=[
+            "politics",
+            "pickup_lines",
+            "marriage",
+            "education",
+            "personal",
+            "relationship",
+        ],
+        help="Filter quotes by category",
+    )
 
-    parser.add_argument('-d', '--difficulty',
-                       type=int,
-                       choices=range(1, 11),
-                       default=10,
-                       help='Maximum difficulty level (1-10, default: 10)')
+    parser.add_argument(
+        "-d",
+        "--difficulty",
+        type=int,
+        choices=range(1, 11),
+        default=10,
+        help="Maximum difficulty level (1-10, default: 10)",
+    )
 
-    parser.add_argument('--stats',
-                       action='store_true',
-                       help='Show usage statistics')
+    parser.add_argument("--stats", action="store_true", help="Show usage statistics")
 
-    parser.add_argument('--reset',
-                       action='store_true',
-                       help='Reset usage tracking for all quotes')
+    parser.add_argument(
+        "--reset", action="store_true", help="Reset usage tracking for all quotes"
+    )
 
-    parser.add_argument('--version',
-                       action='version',
-                       version='%(prog)s 1.0.0')
+    parser.add_argument("--version", action="version", version="%(prog)s 1.0.0")
 
     args = parser.parse_args()
 
@@ -59,8 +71,7 @@ def main():
     # Get and present a quote
     try:
         quote = db.get_unused_quote(
-            category=args.category,
-            max_difficulty=args.difficulty
+            category=args.category, max_difficulty=args.difficulty
         )
 
         if not quote:
@@ -72,7 +83,7 @@ def main():
         present_miriam_wisdom(quote, interactive=args.interactive)
 
         # Mark as used
-        db.mark_as_used(quote['id'])
+        db.mark_as_used(quote["id"])
 
     except KeyboardInterrupt:
         print("\n\n👋 Salamat! Until next time...")
@@ -80,6 +91,7 @@ def main():
     except Exception as e:
         print(f"Error: {e}")
         sys.exit(1)
+
 
 def show_stats(db):
     """Display usage statistics"""
@@ -92,8 +104,9 @@ def show_stats(db):
     print(f"Available quotes: {stats['unused']}")
     print("\nBy category:")
 
-    for category, count in stats['by_category'].items():
+    for category, count in stats["by_category"].items():
         print(f"  {category}: {count} quotes")
+
 
 if __name__ == "__main__":
     main()

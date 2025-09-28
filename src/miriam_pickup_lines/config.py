@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+
 def find_project_root(start_path: Path = None) -> Path:
     """Find project root by locating pyproject.toml file."""
     if start_path is None:

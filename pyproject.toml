@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "miriam-pickup-lines"
-version = "1.0.0"
+version = "0.1.0"
 description = "Miriam Defensor Santiago's witty political and romantic punchlines with typing effects"
 authors = [{name = "Onehand-Coding", email = "onehand.coding433@gmail.com"}]
 license = {text = "MIT"}
