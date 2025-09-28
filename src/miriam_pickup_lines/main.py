@@ -41,6 +41,13 @@ def main():
         help="Maximum difficulty level (1-10, default: 10)",
     )
 
+    parser.add_argument(
+        "-s", 
+        "--sound", 
+        action="store_true",
+        help="Enable sound effects for each typed character"
+    )
+
     parser.add_argument("--stats", action="store_true", help="Show usage statistics")
 
     parser.add_argument(
@@ -68,6 +75,9 @@ def main():
         print("✅ Usage tracking reset. All quotes are now available again.")
         return
 
+    # Check if sound is enabled
+    sound_enabled = bool(args.sound)
+
     # Get and present a quote
     try:
         quote = db.get_unused_quote(
@@ -79,8 +89,8 @@ def main():
             print("Try running with --reset to refresh the pool.")
             return
 
-        # Present the quote
-        present_miriam_wisdom(quote, interactive=args.interactive)
+        # Present the quote with optional sound
+        present_miriam_wisdom(quote, interactive=args.interactive, sound_enabled=sound_enabled)
 
         # Mark as used
         db.mark_as_used(quote["id"])

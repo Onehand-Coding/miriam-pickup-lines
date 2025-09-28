@@ -10,11 +10,13 @@ authors = [{name = "Onehand-Coding", email = "onehand.coding433@gmail.com"}]
 license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.8"
-dependencies = []
+dependencies = [
+    "pygame>=2.0.0"
+]
 
 [project.scripts]
 miriam-pickup-line = "miriam_pickup_lines.main:main"
-miriam-politics = "miriam_pickup_lines.main:main"
+miriam-politics = "miriam_pickup_line.main:main"
 miriam-wisdom = "miriam_pickup_lines.main:main"
 
 [project.urls]
