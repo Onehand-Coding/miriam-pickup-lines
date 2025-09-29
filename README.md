@@ -73,3 +73,7 @@ You can generate your own `data/punch_line.json` using this template:
 "miriam_quotes": [
             {"id": 1, "category": "politics", "type": "comparison", "setup": "What is the difference between corruption in the U.S. and corruption in the Philippines?", "punchline": "In the U.S. they go to jail. In the Philippines, they go to the U.S.", "source": "page_unknown", "difficulty_level": 10, "tags": ["corruption", "international", "savage"]}
 ```
+
+## Tribute
+This repo is a tribute to our very own Dr. Miriam Defensor Santiago hoping that someone will follow her ideals
+amidst all this political and corruption issues.

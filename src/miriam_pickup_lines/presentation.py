@@ -121,6 +121,7 @@ def dramatic_pause(seconds):
 
 def present_miriam_wisdom(quote_data, interactive=False, sound_enabled=False):
     """Main presentation function for Miriam's quotes"""
+    print()
     print("=" * 60)
     print("💎 MIRIAM DEFENSOR SANTIAGO'S WISDOM")
     print("=" * 60)
@@ -167,9 +168,8 @@ def present_miriam_wisdom(quote_data, interactive=False, sound_enabled=False):
     else:
         typing_with_pauses(punchline, 0.1, sound_enabled=sound_enabled)
 
-    # Final dramatic pause and rating
-    time.sleep(2)
-    print()
+    # Final pause before playing category sounds
+    time.sleep(0.3)
 
     # Play category-specific sound based on the quote category
     category_sound = None
