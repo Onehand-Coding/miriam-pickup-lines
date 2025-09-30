@@ -28,6 +28,7 @@ def main():
             "education",
             "personal",
             "relationship",
+            "wisdom"
         ],
         help="Filter quotes by category",
     )

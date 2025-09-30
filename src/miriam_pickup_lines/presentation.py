@@ -46,8 +46,9 @@ marriage_sound = None
 education_sound = None
 personal_sound = None
 relationship_sound = None
+wisdom_sound = None
 
-if PYGAME_AVAILABLE:
+if PYGAME_AVAILABLE:  # TODO: Download and set suitable sound for each category and difficulty level.
     if KEYPRESS_SOUND.exists():
         keypad_sound = mixer.Sound(str(KEYPRESS_SOUND))
     if BURN_SOUND.exists():
@@ -68,6 +69,7 @@ if PYGAME_AVAILABLE:
         education_sound = mixer.Sound(str(EDUCATION_SOUND))
     if PERSONAL_SOUND.exists():
         personal_sound = mixer.Sound(str(PERSONAL_SOUND))
+        wisdom_sound = mixer.Sound(str(PERSONAL_SOUND))  # Share with this sound for now, we have to set all this later.
     if RELATIONSHIP_SOUND.exists():
         relationship_sound = mixer.Sound(str(RELATIONSHIP_SOUND))
 
@@ -152,8 +154,6 @@ def present_miriam_wisdom(quote_data, interactive=False, sound_enabled=False):
 
     # Present the punchline
     print()
-    typewriter_effect("💡 MIRIAM'S WISDOM:", 0.08, sound_enabled=sound_enabled)
-    time.sleep(1)
 
     # Split long punchlines for dramatic effect
     punchline = quote_data["punchline"]
@@ -185,6 +185,8 @@ def present_miriam_wisdom(quote_data, interactive=False, sound_enabled=False):
         category_sound = personal_sound
     elif quote_data["category"] == "relationship":
         category_sound = relationship_sound
+    elif quote_data["category"] == "wisdom":
+        category_sound = wisdom_sound
 
     # Play the category-specific sound if available
     if sound_enabled and category_sound:
