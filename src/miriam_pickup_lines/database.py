@@ -4,26 +4,25 @@ import random
 from datetime import datetime
 from pathlib import Path
 
-from .config import PROJECT_ROOT
-
-QUOTES_JSON = PROJECT_ROOT / "data" / "punch_line.json"
+from .config import DATA_DIR, QUOTES_DIR
 
 
 class MiriamDatabase:
     def __init__(self, db_path=None):
         if db_path is None:
-            # Create database in user's home directory
-            home_dir = PROJECT_ROOT
-            db_dir = home_dir / "data"
-            db_dir.mkdir(exist_ok=True)
-            self.db_path = db_dir / "miriam_quotes.db"
+            self.db_path = DATA_DIR / "miriam_quotes.db"
         else:
             self.db_path = Path(db_path)
 
-        self.init_database()
-        self.populate_initial_data()
+        self.json_data_key = "miriam_quotes"
 
-    def init_database(self):
+        self.quote_files = QUOTES_DIR.glob("*.json")
+        self.quotes = self.get_quotes(self.json_data_key)
+
+        self.init_db()
+        self.populate_db()
+
+    def init_db(self):
         """Initialize the database with required tables"""
         with sqlite3.connect(self.db_path) as conn:
             conn.execute("""
@@ -43,7 +42,7 @@ class MiriamDatabase:
             """)
             conn.commit()
 
-    def populate_initial_data(self):
+    def populate_db(self):
         """Populate database with initial quotes if empty"""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
@@ -51,9 +50,8 @@ class MiriamDatabase:
             count = cursor.fetchone()[0]
 
             if count == 0:
-                # Insert the JSON data
-                quotes_data = self.get_initial_quotes(QUOTES_JSON)
-                for quote in quotes_data:
+                # Insert the quotes from json data.
+                for quote in self.quotes:
                     cursor.execute(
                         """
                         INSERT INTO quotes
@@ -140,7 +138,13 @@ class MiriamDatabase:
                 "by_category": by_category,
             }
 
-    def get_initial_quotes(self, quotes_json, key="miriam_quotes"):
-        """Return the complete initial quotes data from Miriam's book or any json source."""
-        with open(quotes_json, "r") as f:
-            return json.load(f).get(key, [])
+    def get_quotes(self, key="miriam_quotes"):
+        """Return the complete quotes data from Miriam's book or any json source."""
+        all_quotes = []
+
+        for file in self.quote_files:
+            with open(file, "r") as f:
+                quotes = json.load(f).get(key, [])
+            all_quotes.extend(quotes)
+
+        return all_quotes

@@ -1,4 +1,5 @@
 import os
+from typing import List
 from pathlib import Path
 
 
@@ -20,4 +21,18 @@ def find_project_root(start_path: Path = None) -> Path:
     return start_path
 
 
+def create_folders(folders: List[Path]) -> None:
+    """Create necessary folders."""
+    for folder in folders:
+        folder.mkdir(parents=True, exist_ok=True)
+
+
+# Identify and create the data directories we need.
 PROJECT_ROOT = find_project_root()
+
+DATA_DIR = PROJECT_ROOT / "data"
+QUOTES_DIR = PROJECT_ROOT / "data" / "quotes"
+SOUND_DIR = PROJECT_ROOT / "data" / "sounds"
+
+data_folders = [DATA_DIR, QUOTES_DIR, SOUND_DIR]
+create_folders(data_folders)

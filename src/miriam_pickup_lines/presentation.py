@@ -96,7 +96,7 @@ def typewriter_effect(text, delay=0.05, end_with_newline=True, sound_enabled=Fal
         print()
 
 
-def typing_with_pauses(text, delay=0.05, pause_chars=",.?!", sound_enabled=False):
+def typing_with_pauses(text, delay=0.05, pause_chars=",.?!;:", sound_enabled=False):
     """Typewriter effect with dramatic pauses on punctuation with optional sound"""
     for char in text:
         print(char, end="", flush=True)
@@ -211,3 +211,4 @@ def present_miriam_wisdom(quote_data, interactive=False, sound_enabled=False):
             pygame.time.wait(100)  # Wait 100ms between checks
     
     print()
+    print(f"Page:{quote_data['source']}")
