@@ -3,6 +3,8 @@ import sys
 import os
 from pathlib import Path
 
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1" # Lets hide the pygame prompt.
+
 try:
     import pygame
     from pygame import mixer
@@ -213,4 +215,4 @@ def present_miriam_wisdom(quote_data, interactive=False, sound_enabled=False):
             pygame.time.wait(100)  # Wait 100ms between checks
     
     print()
-    print(f"Page:{quote_data['source']}")
+    # print(f"Page:{quote_data['source']}") # Uncomment to display page number.
